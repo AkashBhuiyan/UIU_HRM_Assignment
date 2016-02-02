@@ -1,0 +1,231 @@
+﻿@model Code_First_MemberShip_Provider.Models.Faculty
+
+@{
+    ViewBag.Title = "Edit";
+    List<SelectListItem> _genders = new List<SelectListItem>()
+    {
+        new SelectListItem
+        {
+             Text = "Male",
+             Value = "Male"
+        },
+        new SelectListItem
+        {
+              Text = "Female",
+              Value = "Female"
+
+        }
+
+    };
+    List<SelectListItem> _designation = new List<SelectListItem>()
+    {
+        new SelectListItem
+        {
+              Text = "Lab Instructor",
+              Value = "Lab Instructor"
+
+        },
+        new SelectListItem
+        {
+              Text = "Teaching Instructor",
+              Value = "Teaching Instructor"
+
+        },
+        new SelectListItem
+        {
+             Text = "Lecturer",
+             Value = "Lecturer"
+        },
+        new SelectListItem
+        {
+              Text = "Assistant Professor",
+              Value = "Assistant professor"
+
+        },
+        new SelectListItem
+        {
+              Text = "Associate Professor",
+              Value = "Associate professor"
+
+        },
+        new SelectListItem
+        {
+              Text = "Professor",
+              Value = "Professor"
+
+        }
+
+    };
+
+    List<SelectListItem> _departmentName = new List<SelectListItem>()
+    {
+        new SelectListItem
+        {
+              Text = "School Of Business Economics",
+              Value = "School Of Business Economics"
+
+        },
+        new SelectListItem
+        {
+              Text = "School Of Science and Engineering (CSE)",
+              Value = "School Of Science and Engineering (CSE)"
+
+        },
+        new SelectListItem
+        {
+              Text = "School Of Science and Engineering (EEE)",
+              Value = "School Of Science and Engineering (EEE)"
+        },
+        new SelectListItem
+        {
+              Text = "Institute Of Natural Sciences",
+              Value = "Institute Of Natural Sciences",
+
+        },
+        new SelectListItem
+        {
+              Text = "Institute of Business & Economic Research",
+              Value = "Institute of Business & Economic Research",
+        },
+        new SelectListItem
+        {
+              Text = "English Language Institute",
+              Value = "English Language Institute"
+
+        }
+
+    };
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "Faculties", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Faculty</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.UserId)
+
+        
+        @Html.HiddenFor(model => model.IsDeleted)
+                   
+        <div style="float:left;margin:30px;background-color:bisque" class="form-group">
+            <div>
+             <img src="@Url.Content(Model.ImageVirtualPath)" id="myImg" width="150" height="150" />
+         </div>
+            <div>
+                <div>
+                    @Html.LabelFor(x => x.file)
+                    <input type="file" name="@Html.NameFor(x => x.file)" id="@Html.IdFor(x => x.file)" />
+                    @Html.ValidationMessageFor(x => x.file)
+                </div>
+            </div>
+        </div>
+        <div style="float:left; background-color:aqua" class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Gender", _genders, "Select Gender", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.Designation)
+                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.DepartmentName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.DepartmentName)
+                @Html.ValidationMessageFor(model => model.DepartmentName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.Salary)
+                @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+ 
+                @Html.HiddenFor(model => model.ImageName)
+                @Html.HiddenFor(model => model.ImagePhysicalPath)
+                @Html.HiddenFor(model => model.ImageVirtualPath)
+               
+            
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Cancel", "Index","Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $(function () {
+        $(":file").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+
+    function imageIsLoaded(e) {
+        $('#myImg').attr('src', e.target.result);
+    };
+
+    $('#DateOfBirth').datepicker();
+
+</script>
+
+
+
+  
+      
+}

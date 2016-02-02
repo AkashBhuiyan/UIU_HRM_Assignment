@@ -1,0 +1,24 @@
+﻿@model Code_First_MemberShip_Provider.Models.EducationalInformation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EducationalInformation</h4>
+    <hr />
+    <div>
+        @Html.DisplayNameFor(model => model.User.Username) |@Html.DisplayFor(model => model.User.Username)
+    </div>
+    <div>
+        <img src="@Url.Content(Model.CertificateVirtualPath)" id="myCertiImg" width="300" height="600" />
+    </div>
+    <div>
+        <img src="@Url.Content(Model.OptionalCertificateVirtualPath)" id="myOptCertiImg"  width="300" height="600" />
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserId })
+</p>

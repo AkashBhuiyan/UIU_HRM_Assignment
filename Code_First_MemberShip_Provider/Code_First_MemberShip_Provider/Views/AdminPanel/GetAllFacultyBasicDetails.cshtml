@@ -1,0 +1,37 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Code_First_MemberShip_Provider.Models.Faculty>
+
+@{
+    ViewBag.Title = "Get Faculty Basic Details";
+}
+
+<h2>Faculties Details</h2>
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6">
+            <div style="margin:10px;">
+
+                <div style="float:left;margin:10px;">
+                    <div>
+                        <img src="@Url.Content(item.ImageVirtualPath)" id="myImg" width="150" height="150" />
+                    </div>
+                </div>
+                <div style="margin-right:5px;float:left" width="150" height="150">
+                    @Html.DisplayNameFor(model => model.First().FirstName):@Html.DisplayFor(modelItem => item.FirstName)<br />
+                    @Html.DisplayNameFor(model => model.First().LastName):@Html.DisplayFor(modelItem => item.LastName)<br />
+                    @Html.DisplayNameFor(model => model.First().Gender):@Html.DisplayFor(modelItem => item.Gender)<br />
+                    @Html.DisplayNameFor(model => model.First().DepartmentName):@Html.DisplayFor(modelItem => item.DepartmentName)<br />
+                    @Html.DisplayNameFor(model => model.First().Designation):@Html.DisplayFor(modelItem => item.Designation)<br />
+                </div>
+                <div style="margin:10px;float:left">
+                    @Html.ActionLink("Edit", "EditFacultyBasicInfo", new { id = item.UserId }) |
+                    @Html.ActionLink("Details", "GetFacultyBasicDetails", new { id = item.UserId })|
+                    @Html.ActionLink("Contact Details", "GetFacultyContactDetails", new { id = item.UserId }) |
+                    @Html.ActionLink("Education Details", "GetFacultyEducationDetails", new { id = item.UserId })
+                </div>
+            </div>
+        </div>
+    }
+@Html.PagedListPager(Model,page=> Url.Action("GetAllFacultyBasicDetails", new { page}))

@@ -1,0 +1,69 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Code_First_MemberShip_Provider.Models.EducationalInformation>
+
+@{
+    ViewBag.Title = "Get All Faculty Educational Details";
+}
+
+<h2></h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().User.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CertificateImageName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CertificateVirtualPath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CertificatePhysicalPath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OptionalCertificateImageName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OptionalCertificateVirtualPath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OptionalCertificatePhysicalPath)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CertificateImageName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CertificateVirtualPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CertificatePhysicalPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionalCertificateImageName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionalCertificateVirtualPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionalCertificatePhysicalPath)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "GetFacultyEducationDetails", new { id = item.UserId })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("GetAllFacultyBasicDetails", new { page }))

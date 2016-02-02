@@ -1,0 +1,64 @@
+﻿@model Code_First_MemberShip_Provider.Models.EducationalInformation
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "EducationalInformations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>EducationalInformation</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.UserId)
+
+        @Html.HiddenFor(model => model.CertificateImageName)
+        @Html.HiddenFor(model => model.CertificatePhysicalPath)
+        @Html.HiddenFor(model => model.CertificateVirtualPath)
+        @Html.HiddenFor(model => model.OptionalCertificateImageName)
+        @Html.HiddenFor(model => model.OptionalCertificatePhysicalPath)
+        @Html.HiddenFor(model => model.OptionalCertificateVirtualPath)
+
+
+        <div class="form-group">
+            <div>
+                <img src="@Url.Content(Model.CertificateVirtualPath)" id="myCertiImg" width="300" height="600" />
+            </div>
+            
+            <div>
+                @Html.LabelFor(x => x.CertificateImageFile)
+                <input type="file" name="@Html.NameFor(x => x.CertificateImageFile)" id="@Html.IdFor(x => x.CertificateImageFile)" />
+                @Html.ValidationMessageFor(x => x.CertificateImageFile)
+            </div>
+
+        </div>
+        <div>
+            <img src="@Url.Content(Model.OptionalCertificateVirtualPath)" id="myOptCertiImg" width="300" height="600" />
+        </div>
+        <div class="form-group">
+            <div>
+                @Html.LabelFor(x => x.OptionalCertificateImageFile)
+                <input type="file" name="@Html.NameFor(x => x.OptionalCertificateImageFile)" id="@Html.IdFor(x => x.OptionalCertificateImageFile)" />
+                @Html.ValidationMessageFor(x => x.OptionalCertificateImageFile)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Cancel", "Index", "Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
